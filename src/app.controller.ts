@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   Post,
+  Query,
   Redirect,
   Render,
 } from '@nestjs/common';
@@ -30,9 +31,9 @@ export class AppController {
     return {};
   }
   
-  @Get('/:szem_szin')
+  @Get('/keres')
   @Render('list')
-  async cicaSearch(@Param('szem_szin') szem_szin: string)  {
+  async cicaSearch(@Query('szem_szin') szem_szin: string)  {
     const [rows] = await db.execute(
       'SELECT suly, szem_szin FROM macskak WHERE szem_szin LIKE ?',[szem_szin],
     );
